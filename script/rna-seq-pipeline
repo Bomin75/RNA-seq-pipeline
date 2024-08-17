@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ $# -lt 1 ] ; then
+	echo "./rna-seq-pipeline [filename]"
+	exit 1
+fi
+
+# first arg : fastq filename
+
+filename="$1"
+
+SECONDS=0
+
+cd ~/bioinformatics/rna-seq-pipeline/
+
+fastqc data/"$filename".fastq -o fastqc-results/
+
+# fastp -i data/"$filename".fastq -o data/ 
+
+duration=$SECONDS
+echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
