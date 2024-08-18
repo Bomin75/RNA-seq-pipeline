@@ -13,25 +13,9 @@ SECONDS=0
 
 cd ~/bioinformatics/rna-seq-pipeline/
 
-# fastqc data/"$filename".fastq -o fastqc-results/
-
-# trimmomatic is omitted as data seems to have satisfactory quality
-# if trimming, keep at least 80%
-
-# java -jar Trimmomatic-0.39/trimmomatic-0.39.jar PE data/SRR11497577_1.fastq data/SRR11497577_2.fastq \
-# data/SRR11497577_paired_1.fastq data/SRR11497577_unpaired_1.fastq \
-# data/SRR11497577_paired_2.fastq data/SRR11497577_unpaired_2.fastq
-
-fastp -i data/"$filename"_1.fastq -I data/"$filename"_2.fastq -m --merged_out data/"$filename".fastq
-
 fastqc data/"$filename".fastq -o fastqc-results/
 
-# cd ~/bioinformatics/rna-seq-pipeline/HISAT2
-# wget https://genome-idx.s3.amazonaws.com/hisat/grch38_genome.tar.gz
-
-hisat2 -q --rna-strandness FR -x HISAT2/grch38/genome -U data/"$filename".fastq | samtools sort -o HISAT2/"$filename".bam
-
-featureCounts -s 0 -a reference/Homo_sapiens.GRCh38.112.gtf -o quants/"$filename"_featureCounts.txt HISAT2/"$filename".bam
+# fastp -i data/"$filename".fastq -o data/ 
 
 duration=$SECONDS
 echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
