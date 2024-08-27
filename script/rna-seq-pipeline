@@ -7,7 +7,7 @@ fi
 
 # first arg : fastq filename
 
-filename="$1"
+filename=SRR114975"$1"
 
 SECONDS=0
 
